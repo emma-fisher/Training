@@ -118,27 +118,10 @@ Hillion,1363900,Chizered,Westuming`;
  * This function should return an array containing the
  * converted data.
  ******************************************************/
-function convertData(data) {
-    var countries = [];
-    var states = [];
-    var cities = [];
-    var populations = [];
-   var myArray = data.map(function (item) {
-    var keys = Object.keys(item);
-    var values = Object.values(item);
-    data.forEach(function(key) {
-        countries = values[3];
-        states = values[2];
-        cities = values[1];
-        populations = values[0];
-    });
-    // countries.push();
-    console.log(countries);
-   });
-  
-   console.log(states);
-   console.log(cities);
-   console.log(populations);
+function convertData(cities) {
+    var countries = cities.map(city => city.Country);
+    
+console.log(JSON.stringify(countries,null, 4));
 }
 
 /******************************************************
@@ -204,7 +187,7 @@ function display(data) {
 function main() {
     var data = d3.csvParse(csvData);
     var convertedData = convertData(data);
-    var sortedData = sortData(convertedData);
+    //var sortedData = sortData(convertedData);
     //display(sortedData);
 }
 
