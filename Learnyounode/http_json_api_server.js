@@ -2,14 +2,12 @@ var http = require('http');
 var url = require('url');
 
 function getRegularTime(time) {
-	console.log(typeof time);
 	return {
 		hour: time.getHours(),
 		minute: time.getMinutes(),
 		second: time.getSeconds()
 	}
 }
-console.log(getRegularTime('2018-03-15T14:19:40.457Z'));
 
 function getUnixTime(time) {
 	return {
@@ -20,14 +18,14 @@ function getUnixTime(time) {
 var server = http.createServer(function(request, response) {
 	 var parsedUrl = url.parse(request.url, true);
 	 var time = new Date(parsedUrl.query.iso);
-	 console.log(typeof time);
+	 var output;
 	 if (parsedUrl.pathname == '/api/parsetime') {
-		 getRegularTime(time);
+		 output = getRegularTime(time);
 	 } else if (parsedUrl.pathname == '/api/unixtime') {
-		 //time = JSON.stringify(parsedUrl.path);
-		 getUnixTime(time);
+		 output = getUnixTime(time);
 	 }
 	 response.writeHead(200, { 'Content-Type': 'application/json' });
+	 response.write(JSON.stringify(output));
 	 response.end();
 	 
 })
