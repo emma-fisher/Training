@@ -1,4 +1,4 @@
-var http = require{'http');
+var http = require('http');
 var bl = require('bl');
 var results = [];
 var count = 0;
@@ -10,7 +10,7 @@ function printResults() {
 }
 
 function httpGet(index) {
-	http.get(process.argv[2 + index], function(response) {
+	http.get(process.argv[2 + index],(response) => {
 		response.pipe(bl(function (err, data) {
 			if (err) 
 				return console.error(err);
@@ -24,5 +24,5 @@ function httpGet(index) {
 }
 
 for (var i = 0; i < 3; i++) {
-	htppGet(i);
+	httpGet(i);
 }
